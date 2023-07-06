@@ -13,6 +13,7 @@ import com.netflix.graphql.dgs.exceptions.DgsEntityNotFoundException;
 import graphql.GraphQLException;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 @DgsComponent
@@ -59,8 +60,11 @@ public class UserDataResolver {
                 .build();
     }
 
+    @Secured("ROLE_ADMIN")
     @DgsMutation(field = DgsConstants.MUTATION.UserActivate)
-    public UserActivationResponse userActivation(@InputArgument(name="user") UserActivationInput userActivationInput) {
+    public UserActivationResponse userActivation(
+            @InputArgument(name="user") UserActivationInput userActivationInput) {
+
         var userz = userzCommandService.activateUser(userActivationInput.getUsername(),userActivationInput.getActive())
                         .orElseThrow(DgsEntityNotFoundException::new);
 

@@ -25,7 +25,7 @@ public class Userz {
     private String displayName;
     private boolean active;
 
-   // private String userRole;
+    private String userRole;
 
     public String getId() {
         return id;
@@ -91,11 +91,11 @@ public class Userz {
         this.active = active;
     }
 
-/*    public String getUserRole() {
+    public String getUserRole() {
         return userRole;
     }
 
     public void setUserRole(String userRole) {
         this.userRole = userRole;
-    }*/
+    }
 }
