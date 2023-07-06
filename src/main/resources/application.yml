@@ -1,0 +1,14 @@
+spring:
+  output:
+    ansi:
+      enabled: always
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/problemz?useSSL=false&serverTimezone=UTC
+    username: root
+    password: Mysqlmysql1!
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+

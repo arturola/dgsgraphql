@@ -1,0 +1,20 @@
+type Hello {
+    text: String!
+    randomNumber: Int
+}
+
+input HelloInput {
+    text: String!
+    randomNumber: Int!
+}
+#type Query {
+ #   allHellos: [Hello]
+  #  oneHello: Hello
+    # Las querys las implementamos ahora en el codigo
+#}
+
+# Lo siguiente no es necesario ya que type es Query y mutacion:
+#schema {
+ #   query: Query
+#}
+

@@ -1,0 +1,42 @@
+scalar Url
+scalar Date
+scalar NonNegativeInt
+scalar DateTime
+
+
+type Query {
+    allHellos: [Hello]
+    oneHello: Hello
+    books(author: String): [Book]
+    booksByReleased(releasedInput: ReleaseHistoryInput!): [Book]
+    mobileApps(mobileAppFilter: MobileAppFilter): [MobileApp]
+    pets(petFilter: PetFilter): [Pet]
+    additionalDataOnRequest: String
+
+    me: User!
+    problemLatestList: [Problem!]
+    itemSearch(filter: SearchItemFilter): [SearcheableItem]
+    problemDetail(id: ID!): Problem!
+# Las querys las implementamos ahora en el codigo
+}
+
+type Mutation {
+    addHello(helloInput: HelloInput!): Int
+    deleteHello(number: Int!): Int
+    replaceHello(helloInput: HelloInput!): [Hello]
+    userCreate(user: UserCreateInput!): UserResponse!
+    userLogin(user: UserLoginInput!): UserResponse!
+    userActivate(user: UserActivationInput!): UserActivationResponse!
+    problemCreate(problem: ProblemCreateInput!): ProblemResponse!
+    solutionCreate(solution: SolutionCreateInput!): SolutionResponse!
+    sotutionVote(vote: SolutionVoteInput!): SolutionResponse!
+
+   # replacerHello(number: Int!, newText: String!): [Hello]
+}
+
+type Subscription {
+    randomStock: Stock
+    problemAdded: Problem!
+    solutionVoteChanged(solutionId: ID!): Solution!
+}
+

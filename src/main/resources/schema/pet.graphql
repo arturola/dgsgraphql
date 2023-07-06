@@ -1,0 +1,30 @@
+enum FoodType {
+    HEBIVORE, CARNIVORE, OMNIVORE
+}
+
+interface Pet {
+    name: String!
+    food: FoodType
+    breed: String
+}
+
+type Dog implements Pet {
+    """ Anyado documentacion de ejemplo a mi graphQL, explicando que Dog implementa a Pet y anyade dos o tres campos."""
+    name: String!
+    food: FoodType
+    breed: String
+    size: String
+    coatLenght:String
+}
+
+type Cat implements Pet {
+    name: String!
+    food: FoodType
+    breed: String
+    registry: String
+}
+
+input PetFilter {
+    petType: String
+
+}

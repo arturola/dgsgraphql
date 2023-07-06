@@ -1,0 +1,60 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.1'
+	id 'io.spring.dependency-management' version '1.1.0'
+	id("com.netflix.dgs.codegen") version "5.12.3"
+}
+
+group = 'com.arturola'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// https://mvnrepository.com/artifact/org.springframework/spring-core
+	//implementation group: 'org.springframework', name: 'spring-core', version: '5.3.1'
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'mysql:mysql-connector-java:8.0.33'
+	implementation 'org.ocpsoft.prettytime:prettytime:5.0.7.Final'
+	implementation 'org.bouncycastle:bcprov-jdk15on:1.68'
+	implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:latest.release"))
+	implementation "com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter"
+	implementation "com.netflix.graphql.dgs:graphql-dgs-extended-scalars"
+	implementation "com.netflix.graphql.dgs:graphql-dgs-subscriptions-websockets-autoconfigure"
+	implementation "net.datafaker:datafaker:1.7.0"
+	implementation "org.apache.commons:commons-lang3:3.12.0"
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// https://mvnrepository.com/artifact/org.mockito/mockito-core
+	//testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.1.0'
+
+
+
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+
+
+generateJava {
+	//packageName="com.arturola.graphql.generated"
+	generateClient=true
+	typeMapping = [
+			"Date": "java.time.LocalDate",
+			"NonNegativeInt": "java.lang.Integer",
+			"Url": "java.net.URL",
+			"DateTime": "java.time.OffsetDateTime"
+	]
+
+}
