@@ -1,6 +1,7 @@
 package com.arturola.graphql.exception.handle;
 
 import com.arturola.graphql.exception.ProblemzAuthenticationException;
+import com.arturola.graphql.exception.ProblemzPermitionException;
 import com.netflix.graphql.dgs.exceptions.DefaultDataFetcherExceptionHandler;
 import com.netflix.graphql.types.errors.ErrorType;
 import com.netflix.graphql.types.errors.TypedGraphQLError;
@@ -25,6 +26,20 @@ public class GraphqlExceptionHandler implements DataFetcherExceptionHandler {
                     .path(handlerParameters.getPath())
                     //.errorType(ErrorType.UNAUTHENTICATED)
                     .errorDetail(new ProblemzErrorDetail())
+                    .build();
+
+            var result = DataFetcherExceptionHandlerResult.newResult()
+                    .error(graphqlError)
+                    .build();
+
+            return CompletableFuture.completedFuture(result);
+        }
+
+        if(exception instanceof ProblemzPermitionException) {
+            var graphqlError = TypedGraphQLError.newBuilder().message(exception.getMessage())
+                    .path(handlerParameters.getPath())
+                    .errorType(ErrorType.PERMISSION_DENIED)
+                    //.errorDetail(new ProblemzErrorDetail())
                     .build();
 
             var result = DataFetcherExceptionHandlerResult.newResult()
