@@ -5,6 +5,7 @@ scalar DateTime
 
 
 type Query {
+    greeting: String
     allHellos: [Hello]
     oneHello: Hello
     books(author: String): [Book]

@@ -28,6 +28,10 @@ public class ProblemDataResolver {
     @Autowired
     private UserzQueryService userzQueryService;
 
+    @DgsQuery(field = DgsConstants.QUERY.Greeting)
+    public String getGreeting() {
+        return "Hello GraphQL";
+    }
     @DgsQuery(field = DgsConstants.QUERY.ProblemLatestList)
     public List<Problem> getProblems() {
         return problemzQueryService.problemLatestList().stream()
